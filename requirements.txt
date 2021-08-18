@@ -1,0 +1,9 @@
+alpaca_trade_api
+psycopg2
+psycopg2-binary
+requests
+asyncpg
+aiohttp
+datetime
+beautifulsoup4
+

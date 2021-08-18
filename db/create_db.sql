@@ -1,0 +1,2 @@
+CREATE DATABASE etfdb;
+CREATE DATABASE pricedb;
