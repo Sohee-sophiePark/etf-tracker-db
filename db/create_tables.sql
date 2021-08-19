@@ -34,7 +34,22 @@ CREATE TABLE IF NOT EXISTS stock_price (
 );
 
 
-CREATE INDEX ON stock_price (stock_id, dt DESC);
+--DROP TABLE mention;
+CREATE TABLE IF NOT EXISTS mention (
+    stock_id INTEGER NOT NULL, --FK
+    dt TIMESTAMP WITHOUT TIME ZONE NOT NULL, --accuracy
+    message TEXT NOT NULL,
+    source TEXT NOT NULL, -- multiple channels
+    url TEXT NOT NULL,
+    PRIMARY KEY (stock_id, dt),
+    CONSTRAINT fk_mention_stock FOREIGN KEY (stock_id) REFERENCES stock (id) ON DELETE CASCADE
+
+);
+
+
+CREATE INDEX ON mention (stock_id, dt DESC);
+SELECT create_hypertable('mention', 'dt')
 
 -- create_hypertable:  partitioned by time as using the values in 'time' column
+CREATE INDEX ON stock_price (stock_id, dt DESC);
 SELECT create_hypertable('stock_price', 'dt');

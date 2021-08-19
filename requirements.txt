@@ -6,4 +6,5 @@ asyncpg
 aiohttp
 datetime
 beautifulsoup4
-
+schedule
+psaw

@@ -41,10 +41,14 @@ for curr_date in dates:
                                 """, (ticker, ))
                     stock = cursor.fetchone()
                     if stock:
-                        cursor.execute("""
-                                    INSERT INTO etf_holding (etf_id, holding_id, dt, shares, weight)
-                                    VALUES (%s, %s, %s, %s, %s)
-                                    """, (etf['id'], stock['id'], curr_date, shares, weight))
+                        try:
+                            cursor.execute("""
+                                           INSERT INTO etf_holding (etf_id, holding_id, dt, shares, weight)
+                                           VALUES (%s, %s, %s, %s, %s)
+                                           """, (etf['id'], stock['id'], curr_date, shares, weight))
+                        except Exception as e:
+                            print(e)
+                            connection.rollback()
                         
 connection.commit()
 
